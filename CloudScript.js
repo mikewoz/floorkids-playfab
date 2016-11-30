@@ -29,7 +29,8 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-handlers.OpenPack = function (args) {
+handlers.OpenPack = function (args)
+{
 
 	var GetUserInventoryRequest = {
 	  "PlayFabId": currentPlayerId
@@ -40,7 +41,7 @@ handlers.OpenPack = function (args) {
 	var userVcBalances = GetUserInventoryResult.VirtualCurrency;
 // 	var userVcRecharge = GetUserInventoryResult.VirtualCurrencyRechargeTimes;
 
-	// make sure the player has > 0 lives before proceeding. 
+	// make sure the player has > 0 packs before proceeding.
 	try
 	{
 		if(!HasPacks(userVcBalances))
@@ -53,26 +54,39 @@ handlers.OpenPack = function (args) {
 		return JSON.stringify(ex);
 	}
 
-  SubtractVc(userVcBalances, "PA", 1);
+  if(HasPacks(userVcBalances))
+  {
+    SubtractVc(userVcBalances, "PA", 1);
 
-  var results = {
-    "PlayFabId" : currentPlayerId,
-    "RemainingPacks" : userVcBalances["PA"],
-    "Cards" : []
-  };
+    var results = {
+      "PlayFabId" : currentPlayerId,
+      "Valid" : true,
+      "RemainingPacks" : userVcBalances["PA"],
+      "Cards" : []
+    };
   
-  results.cards.push({
-    "Type" : "ActionCard",
-    "Id" : "POW_ASDF"
-  });
-  results.cards.push({
-    "Type" : "ActionCard",
-    "Id" : "POW_QWERTY"
-  });
-  results.cards.push({
-    "Type" : "CharacterCard",
-    "Id" : "Random"
-  });
+    results.cards.push({
+      "Type" : "ActionCard",
+      "Id" : "POW_ASDF"
+    });
+    results.cards.push({
+      "Type" : "ActionCard",
+      "Id" : "POW_QWERTY"
+    });
+    results.cards.push({
+      "Type" : "CharacterCard",
+      "Id" : "Random"
+    });
+  }
+  else
+  {
+    var results = {
+      "PlayFabId" : currentPlayerId,
+      "Valid" : false,
+      "RemainingPacks" : userVcBalances["PA"],
+      "Cards" : []
+    };
+  }
 
 	return JSON.stringify(results);
 
