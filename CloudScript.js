@@ -65,15 +65,15 @@ handlers.OpenPack = function (args)
       "Cards" : []
     };
   
-    results.cards.push({
+    results.Cards.push({
       "Type" : "ActionCard",
       "Id" : "POW_ASDF"
     });
-    results.cards.push({
+    results.Cards.push({
       "Type" : "ActionCard",
       "Id" : "POW_QWERTY"
     });
-    results.cards.push({
+    results.Cards.push({
       "Type" : "CharacterCard",
       "Id" : "Random"
     });
