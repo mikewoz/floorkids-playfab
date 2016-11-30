@@ -31,6 +31,10 @@
 
 handlers.OpenPack = function (args) {
 
+	var GetUserInventoryRequest = {
+	  "PlayFabId": currentPlayerId
+  };
+  
   var GetUserInventoryResult = server.GetUserInventory(GetUserInventoryRequest);
 	var userInventory = GetUserInventoryResult.Inventory;
 	var userVcBalances = GetUserInventoryResult.VirtualCurrency;
@@ -54,21 +58,21 @@ handlers.OpenPack = function (args) {
   var results = {
     "PlayFabId" : currentPlayerId,
     "RemainingPacks" : userVcBalances["PA"],
-    "Cards" : [
-      {
-        "Type" : "ActionCard",
-        "Id" : "POW_ASDF"
-      },
-      {
-        "Type" : "ActionCard",
-        "Id" : "POW_ASDF"
-      },
-      {
-        "Type" : "CharacterCard",
-        "Id" : "Random"
-      }
-    ]
+    "Cards" : []
   };
+  
+  results.cards.push({
+    "Type" : "ActionCard",
+    "Id" : "POW_ASDF"
+  });
+  results.cards.push({
+    "Type" : "ActionCard",
+    "Id" : "POW_QWERTY"
+  });
+  results.cards.push({
+    "Type" : "CharacterCard",
+    "Id" : "Random"
+  });
 
 	return JSON.stringify(results);
 
