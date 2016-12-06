@@ -21,6 +21,8 @@ handlers.GetPackStore = function (args)
       "Quantity" : 1,
       "Cost" : 232
     });
+    
+    return JSON.stringify(results);
 }
 
 handlers.OpenPack = function (args)
