@@ -1,33 +1,27 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 //
-// Welcome to your first Cloud Script revision!
+// Floor Kids Cloud Scripts
 //
-// Cloud Script runs in the PlayFab cloud and has full access to the PlayFab Game Server API 
-// (https://api.playfab.com/Documentation/Server), and it runs in the context of a securely
-// authenticated player, so you can use it to implement logic for your game that is safe from
-// client-side exploits. 
-//
-// Cloud Script functions can also make web requests to external HTTP
-// endpoints, such as a database or private API for your title, which makes them a flexible
-// way to integrate with your existing backend systems.
-//
-// There are several different options for calling Cloud Script functions:
-//
-// 1) Your game client calls them directly using the "ExecuteCloudScript" API,
-// passing in the function name and arguments in the request and receiving the 
-// function return result in the response.
-// (https://api.playfab.com/Documentation/Client/method/ExecuteCloudScript)
-// 
-// 2) You create PlayStream event actions that call them when a particular 
-// event occurs, passing in the event and associated player profile data.
-// (https://api.playfab.com/playstream/docs)
-// 
-// 3) For titles using the Photon Add-on (https://playfab.com/marketplace/photon/),
-// Photon room events trigger webhooks which call corresponding Cloud Script functions.
-// 
-// The following examples demonstrate all three options.
+// PlayFab Game Server API: https://api.playfab.com/Documentation/Server
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+handlers.GetPackStore = function (args)
+{
+
+  var results = {
+      "PlayFabId" : currentPlayerId,
+      "Valid" : true,
+      "Items" : []
+    };
+    
+    results.Cards.push({
+      "Id" : "fadsfas",
+      "Description" : "",
+      "Quantity" : 1,
+      "Cost" : 232
+    });
+}
 
 handlers.OpenPack = function (args)
 {
@@ -170,49 +164,6 @@ handlers.makeAPICall = function (args, context) {
         }
     );
 }
-
-// This is a simple example of making a web request to an external HTTP API.
-handlers.makeHTTPRequest = function (args, context) {
-    var headers = {
-        "X-MyCustomHeader": "Some Value"
-    };
-    
-    var body = {
-        input: args,
-        userId: currentPlayerId,
-        mode: "foobar"
-    };
-
-    var url = "http://httpbin.org/status/200";
-    var content = JSON.stringify(body);
-    var httpMethod = "post";
-    var contentType = "application/json";
-    var logRequestAndResponse = true;
-    
-    // The pre-defined http object makes synchronous HTTP requests
-    var response = http.request(url, httpMethod, content, contentType, headers, logRequestAndResponse);
-    return { responseContent: response };
-}
-
-// This is a simple example of a function that is called from a
-// PlayStream event action. (https://playfab.com/introducing-playstream/)
-handlers.handlePlayStreamEventAndProfile = function (args, context) {
-    
-    // The event that triggered the action 
-    // (https://api.playfab.com/playstream/docs/PlayStreamEventModels)
-    var psEvent = context.playStreamEvent;
-    
-    // The profile data of the player associated with the event
-    // (https://api.playfab.com/playstream/docs/PlayStreamProfileModels)
-    var profile = context.playerProfile;
-    
-    // Post data about the event to an external API
-    var content = JSON.stringify({user: profile.PlayerId, event: psEvent.EventName});
-    var response = http.request('https://httpbin.org/status/200', 'post', content, 'application/json', null, true);
-    
-    return { externalAPIResponse: response };
-}
-
 
 // Below are some examples of using Cloud Script in slightly more realistic scenarios
 
