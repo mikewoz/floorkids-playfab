@@ -15,7 +15,7 @@ handlers.GetPackStore = function (args)
       "Items" : []
     };
     
-    results.Cards.push({
+    results.Items.push({
       "Id" : "fadsfas",
       "Description" : "",
       "Quantity" : 1,
