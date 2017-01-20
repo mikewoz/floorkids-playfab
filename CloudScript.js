@@ -9,22 +9,21 @@
 handlers.ConsumeCards = function (args)
 {
 
-
-  log.debug("ConsumeCards got:", { input: args.cards });
-
-  var msg = "";
+  var msg = "CloudScript (ConsumeCards) start\n";
   for (var id in args.cards)
   {
-    log.debug("Consuming card: " + id + " with quantity: " + args.cards[id]);
     
-    msg += ", card: "+id+" quantity: "+args.cards[id];
+    msg += "-- got card: "+id+" quantity: "+args.cards[id];
 
-//     var ConsumeRequest = {
-//         "PlayFabId" : currentPlayerId,
-//         "ItemInstanceId": id,
-//         "ConsumeCount": cards[id]
-//       };
-//     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);
+    var ConsumeRequest = {
+      "PlayFabId" : currentPlayerId,
+      "ItemInstanceId": id,
+      "ConsumeCount": arg.cards[id]
+    };
+    var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);
+    
+    
+    msg += " result: " + ConsumeRequestResult.RemainingUses + "\n";
 
   }
 
@@ -38,7 +37,7 @@ handlers.OpenPack = function (args)
 	  "PlayFabId": currentPlayerId
   };
   
-  var GetUserInventoryResult = server.GetUserInventory(GetUserInventoryRequest);
+  var GetUserInventoryResult = GetUserInventory(GetUserInventoryRequest);
 	var userInventory = GetUserInventoryResult.Inventory;
 	var userVcBalances = GetUserInventoryResult.VirtualCurrency;
 // 	var userVcRecharge = GetUserInventoryResult.VirtualCurrencyRechargeTimes;
