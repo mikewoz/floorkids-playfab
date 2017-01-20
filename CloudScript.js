@@ -13,11 +13,11 @@ handlers.ConsumeCards = function (args)
   log.debug("ConsumeCards got:", { input: args.cards });
 
   var msg = "";
-  for (var id in cards)
+  for (var id in args.cards)
   {
-    log.debug("Consuming card: " + id + " with quantity: " + cards[id]);
+    log.debug("Consuming card: " + id + " with quantity: " + args.cards[id]);
     
-    msg += ", card: "+id+" quantity: "+cards[id];
+    msg += ", card: "+id+" quantity: "+args.cards[id];
 
 //     var ConsumeRequest = {
 //         "PlayFabId" : currentPlayerId,
