@@ -23,6 +23,11 @@ handlers.ConsumeCards = function (args)
     
     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);    
     msg += " result: " + ConsumeRequestResult.RemainingUses + "\n";
+    
+    if (ConsumeRequestResult)
+      log.info(ConsumeRequestResult);
+    else
+      log.error(ConsumeRequestResult);    
   }
 
   return msg;
