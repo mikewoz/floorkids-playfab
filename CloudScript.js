@@ -18,8 +18,8 @@ handlers.ConsumeCards = function (args)
       "ConsumeCount": parseInt(args.cards[id])
     };
     
-    var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);    
-    msg += " result=" + ConsumeRequestResult.RemainingUses;
+//     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);    
+//     msg += " result=" + ConsumeRequestResult.RemainingUses;
   }
   return msg;
 }
