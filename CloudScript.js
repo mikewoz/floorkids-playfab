@@ -6,23 +6,29 @@
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-handlers.GetPackStore = function (args)
+handlers.ConsumeCards = function (args)
 {
 
-  var results = {
-      "PlayFabId" : currentPlayerId,
-      "Valid" : true,
-      "Items" : []
-    };
+
+  log.debug("ConsumeCards got:", { input: args.cards });
+
+  var msg = "";
+  for (var id in cards)
+  {
+    log.debug("Consuming card: " + id + " with quantity: " + cards[id]);
     
-    results.Items.push({
-      "Id" : "fadsfas",
-      "Description" : "",
-      "Quantity" : 1,
-      "Cost" : 232
-    });
-    
-    return JSON.stringify(results);
+    msg += ", card: "+id+" quantity: "+cards[id];
+
+//     var ConsumeRequest = {
+//         "PlayFabId" : currentPlayerId,
+//         "ItemInstanceId": id,
+//         "ConsumeCount": cards[id]
+//       };
+//     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);
+
+  }
+
+  return msg;
 }
 
 handlers.OpenPack = function (args)
