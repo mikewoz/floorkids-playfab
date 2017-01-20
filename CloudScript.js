@@ -20,11 +20,9 @@ handlers.ConsumeCards = function (args)
       "ItemInstanceId": id,
       "ConsumeCount": 1//parseInt(args.cards[id])
     };
-//     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);
     
-    
-    msg += " result: " + ConsumeRequestResult.RemainingUses + "\n";
-
+//     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);    
+//     msg += " result: " + ConsumeRequestResult.RemainingUses + "\n";
   }
 
   return msg;
