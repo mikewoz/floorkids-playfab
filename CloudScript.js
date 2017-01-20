@@ -18,7 +18,7 @@ handlers.ConsumeCards = function (args)
     var ConsumeRequest = {
       "PlayFabId" : currentPlayerId,
       "ItemInstanceId": id,
-      "ConsumeCount": args.cards[id]
+      "ConsumeCount": parseInt(args.cards[id])
     };
     var ConsumeRequestResult = server.ConsumeItem(ConsumeRequest);
     
